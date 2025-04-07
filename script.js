@@ -1,3 +1,4 @@
+
 const playlists = [
   {
     title: "Sweet Dreams",
@@ -11,16 +12,8 @@ const playlists = [
     duration: "5:40",
     genre: "Afro beat",
   },
-  { title: " See you",
-     artist: "Simi",
-      duration: "6:54", 
-      genre: "hip Pop"
-    },
-  { title: "life",
-     artist: "Gold",
-      duration: "4:54", 
-      genre: "Rock"
-     },
+  { title: "See You", artist: "Simi", duration: "6:54", genre: "hip Pop" },
+  { title: "Life", artist: "Gold", duration: "4:54", genre: "Rock" },
 ];
 console.table(playlists);
 
@@ -40,6 +33,7 @@ const rockSong = playlists.filter((playlists) => playlists.genre === "Rock");
 //         return playlist
 // }
 console.table(rockSong);
+
 const duration = playlists.filter(time);
 function time(playlists) {
   if (playlists.duration >= "5:00") {
@@ -59,34 +53,38 @@ function song(playlist) {
 }
 console.table(upperCasePlaylist);
 
-
-const durations= "4:45";
-const part = durations.split(":")
-const minute = [1];
-const seconds= [0]
-function timer(duartions) {
-  return `${minute} minute and second ${seconds}`;
+function formatDuration(duration) {
+  const part = duration.split(":")
+  // console.log(part);
+  const minute = part[1];
+  const seconds= part[0];
+   return `${minute} minute(s) and  ${seconds} second(s)`
 }
-playlists.forEach(playlists => {
-  const format= timer(playlists.duration);
-  console.table(`${song.title}: ${format}`)
+
+
+playlists.forEach(playlist => {
+  const format = formatDuration(playlist.duration);
+  console.table(`${playlist.title}: ${format}`)
 });
 
 
 
 function findSong(searchTerm) {
   const search = searchTerm.toLowerCase()
-  playlists.filter(music => {
-    music.artist.includes() || music.title.includes()
-  })
-  console.table(search)
+  const result= playlists.filter(music => 
+    music.artist.includes(searchTerm) || music.title.includes(searchTerm)
+  )
+  // console.table(search)
+  return result
 }
-findSong("Eurythmics")
+console.log(findSong("Simi"))
 // console.table(findSong("Eurythmics"));
 
 
 function durationToSeconds(duration) {
   const [mins, secs] = duration.split(":").map(Number);
+  // console.log(`${mins} ${secs}`);
+  
   return mins * 60 + secs;
 }
 
@@ -100,9 +98,8 @@ const byDuration = [...playlists].sort((a, b) => {
   return durationToSeconds(a.duration) - durationToSeconds(b.duration);
   // Returns a negative number if a is shorter, positive if b is shorter
 });
-console.log("Sorted by duration:");
+console.log("Sorted  by duration:");
 console.table(byDuration);
-
 
 
 function playRandomSong() {
